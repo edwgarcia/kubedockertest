@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+   name: flask-pod
+spec:
+   containers:
+   - name: flask-container01
+     image: edwgarcia25/flask_docker:latest
+     ports:
+     - containerPort: 5000

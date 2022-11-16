@@ -1,0 +1,12 @@
+FROM alpine
+RUN apk add py3-pip build-base python3-dev libffi-dev openssl-dev
+RUN apk add nginx
+RUN mkdir -p /opt/api
+WORKDIR /opt/api
+ADD ./requirements.txt /opt/api
+RUN pip3 install --no-cache-dir -r requirements.txt
+ADD . /opt/api
+ADD ./docker-entrypoint.sh /bin/docker-entrypoint
+ADD ./haproxy.conf /etc/haproxy/haproxy.conf
+EXPOSE 80
+CMD ["/bin/docker-entrypoint"]
